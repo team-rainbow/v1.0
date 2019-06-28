@@ -1,0 +1,69 @@
+create table user(uid int primary key auto_increment,
+                  uname varchar(30) not null,
+                  passwd varchar(20) not null,
+                  gender enum("男","女"),
+                  age int,
+                  //image blob,
+                  phone char(11),
+                  birthday date,
+                  signature longtext,
+                  constellation enum("白羊座","金牛座","双子座","摩羯座","双鱼座",
+                  "巨蟹座","狮子座","处女座","天秤座","天蝎座","水瓶座","射手座"),
+                  city text,
+                  //album blob);
+signature:个性签名
+constellation:星座
+album:相册
+insert into user value(1,"哈哈",123456,"女",25,18523697852,19901020,"不能正常","处女座","西安");
+insert into user value(2,"哼哼",789456,"男",29,19875235641,19861210,"说说什么","金牛座","北京");
+insert into user value(3,"哈卡",188975,"女",18,14525578882,19940325,"已经同意","摩羯座","上海");
+insert into user value(4,"丽丽",700000,"女",21,15201027524,19810296,"鼓鼓囊囊","双子座","北京");
+insert into user value(5,"何飞",427256,"男",32,12451052787,19961201,"和工行和","天秤座","咸阳");
+insert into user value(6,"刘芳",254257,"女",14,12428785422,19861010,"部分功能","双鱼座","北京");
+insert into user value(7,"宁武",422526,"男",44,19175855281,19960608,"更好体验","金牛座","广州");
+
+----------------------------------------------------------------------------------------------------------
+create table friend_list(uid1 int not null,
+                         uid2 int not null,
+                         user_group   char(10) DEFAULT '默认分组',
+                         friend_group char(10) DEFAULT '默认分组');
+insert into friend_list value(1,2,"好友","好友");
+insert into friend_list value(1,3,"好友","同学");
+insert into friend_list value(1,4,"同学","同学");
+insert into friend_list value(1,5,"好友","好友");
+insert into friend_list value(1,6,"好友","好友");
+insert into friend_list value(1,7,"基友","同学");
+insert into friend_list value(2,3,"好友","好友");
+insert into friend_list value(2,4,"同学","同学");
+insert into friend_list value(2,5,"好友","好友");
+insert into friend_list value(2,6,"同学","好友");
+insert into friend_list value(2,7,"好友","闺蜜");
+insert into friend_list value(3,4,"同学","好友");
+insert into friend_list value(3,5,"好友","同学");
+insert into friend_list value(3,6,"同学","同学");
+insert into friend_list value(3,7,"好友","好友");
+insert into friend_list value(4,5,"闺蜜","闺蜜");
+insert into friend_list value(4,6,"好友","好友");
+insert into friend_list value(4,7,"同学","同学");
+insert into friend_list value(5,6,"同学","同学");
+insert into friend_list value(5,7,"好友","同学");
+insert into friend_list value(6,7,"好友","好友");
+
+select uid1,friend_group as mygroup from friend_list where uid2 = "7"
+union all select uid2,user_group as mygroup from friend_list where uid1 = "7";
+
+----------------------------------------------------------------------------------------------------------
+create table game(uid int primary key,
+                  uname varchar(20),
+                  score bigint);
+insert into game value(1,"哈哈",120),(2,"哼哼",140),
+(3,"哈卡",210),(4,"丽丽",176),(5,"何飞",580),(6,"刘芳",620),(7,"宁武",236);
+-----------------------------------------------------------------------------------------------------------
+create table chat_massage(id int primary key,
+                          content longtext,
+                          read_status enum("已读","未读"),
+                          sender_id int,
+                          receiver_id int,
+                          send_time datetime);
+insert into chat_massage value(1,"吃了吗","已读",3,4,2019-10-10-10-10-10);
+

@@ -174,7 +174,7 @@ def usr_sign_up():
     btn_exit.place(x=200, y=210)
 
 
-# 登录界面按钮
+# 登录界面
 btn_login = tk.Button(window, text='登录', command=usr_login, )
 btn_login.place(x=110, y=290)
 btn_sign_up = tk.Button(window, text='注册', command=usr_sign_up, )
